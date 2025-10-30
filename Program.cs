@@ -9,51 +9,48 @@ namespace Stopwatch
             Menu();
         }
 
-
         static void Menu()
         {
             Console.Clear();
-            Console.WriteLine("Digite quantos segundos deseja contar: ");
+            Console.WriteLine("S = Segundo => 10s = 10 segundos");
+            Console.WriteLine("M = Minuto => 1m = 1 minuto");
+            Console.WriteLine("0 = Sair");
+            Console.WriteLine("Quanto tempo deseja contar?");
 
-            Cronometro();
+            string dados = Console.ReadLine().ToLower();
 
-        }
+            char tipo = char.Parse(dados.Substring(dados.Length - 1, 1));
+            int time = int.Parse(dados.Substring(0, dados.Length - 1));
+            int multiplicador = 1;
 
-        static void Cronometro()
-        {
-            int segundos = int.Parse(Console.ReadLine());
-            Preparacao();
-            int tempo = 0;
-            segundos = segundos + 1;
-            while (segundos > tempo)
+            if (tipo == 'm')
             {
-
-                segundos--;
-                Console.WriteLine(segundos);
-                Thread.Sleep(1000);
-
+                multiplicador = 60;
             }
 
+            int numeroFinal = time * multiplicador;
+
+            Start(numeroFinal);
+
+
         }
 
-
-        static void Preparacao()
+        static void Start(int temporizador)
         {
-            Console.WriteLine("Começando a contagem.");
-            Thread.Sleep(900);
+            int usertime = 0;
+            while (usertime != temporizador)
+            {
+                usertime++;
+                Console.WriteLine(usertime);
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+
             Console.Clear();
-            Console.WriteLine(".");
-            Thread.Sleep(500);
-            Console.Clear();
-            Console.WriteLine("..");
-            Thread.Sleep(400);
-            Console.Clear();
-            Console.WriteLine("...");
-            Thread.Sleep(360);
-            Console.Clear();
-            Console.WriteLine("Agora.");
-            Console.Clear();
+            Console.WriteLine("Cronômetro finalizado!");
+            Thread.Sleep(2500);
         }
+
 
     }
 }
